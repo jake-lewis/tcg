@@ -1,10 +1,18 @@
 import { Deck } from "./deck";
-import deckReducer, { addCard, removeCard } from "./deckSlice";
+import deckReducer, { addCard, removeCard, setTitle } from "./deckSlice";
 import { Critter } from "./resources/cards/Critter";
 import TestState from './deckSlice.spec.state';
 
 
 describe('Deck manager operations', () => {
+
+    test('Set deck title', () => {
+        expect(deckReducer(TestState, setTitle('New Title'))).toEqual({
+            ...TestState,
+            title: 'New Title'
+        })
+    });
+
     test('Add new card', () => {
         expect(deckReducer(TestState, addCard(Critter))).toEqual({
             ...TestState,

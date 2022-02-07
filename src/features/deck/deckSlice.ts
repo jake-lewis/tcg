@@ -10,6 +10,7 @@ export const deckSlice = createSlice({
     name: 'deck',
     initialState,
     reducers: {
+        setTitle: (state, action: PayloadAction<string>) => { state.title = action.payload },
         addCard: (state, action: PayloadAction<Card>) => {
             const instance = state.mainDeck.find(inst => inst.card.title === action.payload.title);
             if (instance === undefined)
@@ -34,8 +35,8 @@ export const deckSlice = createSlice({
             }
         }
     }
-})
+});
 
-export const { addCard, removeCard } = deckSlice.actions;
+export const { setTitle, addCard, removeCard } = deckSlice.actions;
 
 export default deckSlice.reducer;
