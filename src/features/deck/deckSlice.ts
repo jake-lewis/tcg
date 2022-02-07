@@ -19,12 +19,23 @@ export const deckSlice = createSlice({
                 instance.number++;
             } else {
                 console.warn(`Can only have a max of ${instance.card.deckLimit} ` +
-                    `${instance.card.deckLimit === 1 ? 'copy' : 'copies'} of ${instance.card.title } at a time.`)
+                    `${instance.card.deckLimit === 1 ? 'copy' : 'copies'} of '${instance.card.title}' at a time.`)
+            }
+        },
+        removeCard: (state, action: PayloadAction<string>) => {
+            const instance = state.mainDeck.find(inst => inst.card.title === action.payload);
+            if (instance === undefined) {
+                console.warn(`Cannot remove card '${action.payload}' since there are none in the deck.`)
+            }
+            else if (instance.number > 1) {
+                instance.number--;
+            } else {
+                state.mainDeck = state.mainDeck.filter(inst => inst.card.title !== action.payload);
             }
         }
     }
 })
 
-export const { addCard } = deckSlice.actions;
+export const { addCard, removeCard } = deckSlice.actions;
 
 export default deckSlice.reducer;
