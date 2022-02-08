@@ -13,8 +13,7 @@ export const deckSlice = createSlice({
         setTitle: (state, action: PayloadAction<string>) => { state.title = action.payload },
         addCard: (state, action: PayloadAction<Card>) => {
             const instance = state.mainDeck.find(inst => inst.card.title === action.payload.title);
-            if (instance === undefined)
-            {
+            if (instance === undefined) {
                 state.mainDeck.push({card: action.payload, number: 1})
             } else if (instance.number < instance.card.deckLimit) {
                 instance.number++;
